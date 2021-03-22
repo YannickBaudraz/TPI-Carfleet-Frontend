@@ -3,6 +3,11 @@
   "rulesDirectory": [
     "codelyzer"
   ],
+  "linterOptions": {
+    "exclude": [
+      "src/assets"
+    ]
+  },
   "rules": {
     "align": {
       "options": [
@@ -82,6 +87,7 @@
         "named": "never"
       }
     },
+    "trailing-comma": true,
     "typedef": [
       true,
       "call-signature"
@@ -108,7 +114,8 @@
       "options": [
         "ban-keywords",
         "check-format",
-        "allow-pascal-case"
+        "allow-pascal-case",
+        "allow-leading-underscore"
       ]
     },
     "whitespace": {

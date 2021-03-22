@@ -30,14 +30,40 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "aot": true,
+            "preserveSymlinks": true,
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/favicon.ico",
+              "src/assets",
+              {
+                "glob": "**/*",
+                "input": "node_modules/ionicons/dist/ionicons",
+                "output": "./ionicons"
+              },
+              {
+                "glob": "**/*.js",
+                "input": "node_modules/ionicons/dist/",
+                "output": "./"
+              }
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/bootstrap/dist/css/bootstrap.css",
+              "node_modules/typeface-exo/index.css",
+              "node_modules/roboto-fontface/css/roboto/roboto-fontface.css",
+              "node_modules/@fortawesome/fontawesome-free/css/all.css",
+              "node_modules/ionicons/scss/ionicons.scss",
+              "node_modules/socicon/css/socicon.css",
+              "node_modules/nebular-icons/scss/nebular-icons.scss",
+              "node_modules/leaflet/dist/leaflet.css",
+              "src/assets/ngx-admin/@theme/styles/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+            ],
+            "allowedCommonJsDependencies": [
+              "style-loader!leaflet/dist/leaflet.css"
+            ]
           },
           "configurations": {
             "production": {
@@ -50,6 +76,7 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
+              "extractCss": true,
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
@@ -98,9 +125,18 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/bootstrap/dist/css/bootstrap.css",
+              "node_modules/typeface-exo/index.css",
+              "node_modules/roboto-fontface/css/roboto/roboto-fontface.css",
+              "node_modules/ionicons/scss/ionicons.scss",
+              "node_modules/socicon/css/socicon.css",
+              "node_modules/nebular-icons/scss/nebular-icons.scss",
+              "src/app/@theme/styles/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/pace-js/pace.min.js"
+            ]
           }
         },
         "lint": {
@@ -111,6 +147,7 @@
               "tsconfig.spec.json",
               "e2e/tsconfig.json"
             ],
+            "typeCheck": true,
             "exclude": [
               "**/node_modules/**"
             ]

@@ -21,6 +21,12 @@
       "dom"
     ]
   },
+  "plugins": [
+    { "name": "tslint-language-service"}
+  ],
+  "typeRoots": [
+    "node_modules/@types"
+  ],
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
