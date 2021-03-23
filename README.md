@@ -1,4 +1,4 @@
-# CarFleet front end
+# CarFleet front end v0.1.0
 
 Front-end application of CarFleet.
 
@@ -13,16 +13,16 @@ Run `yarn install`.
 
 ## Build
 
-Run `yarn build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod`
+Run `yarn build` to build the project to production. The build artifacts will be stored in the `dist/` directory.
 flag for a production build.
 
 ## Usage
 
-[//]: # (TODO: Add usage information)
+Simply run application and navigate with the browser.
 
 ## Documentation
 
-[//]: # (TODO: Add documentation)
+None currently.
 
 ## Development server
 
