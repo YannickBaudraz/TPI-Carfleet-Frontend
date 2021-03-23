@@ -1,0 +1,12 @@
+<nb-card>
+  <nb-card-header>
+    Liste de véhicules immatriculés
+  </nb-card-header>
+
+  <nb-card-body>
+    <ng2-smart-table [settings]="settings"
+                     [source]="vehicles"
+                     (userRowSelect)="onRowSelected($event)"
+    ></ng2-smart-table>
+  </nb-card-body>
+</nb-card>
