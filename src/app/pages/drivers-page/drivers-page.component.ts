@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
 import { Driver } from '../../core/models/backend/dto';
 import { LiteralObject } from '../../core/models/literal-object';
+import { RowSmartTable } from '../../core/models/table/row-smart.table';
 import { ApiService } from '../../core/services/api/api.service';
 import { DriverPageModel } from './driver-page.model';
 
@@ -64,4 +65,7 @@ export class DriversPageComponent implements OnInit {
     }))).subscribe((values: DriverPageModel[]) => this._drivers = values);
   }
 
+  async onRowSelected(value: RowSmartTable): Promise<void> {
+    await this._router.navigate([ `drivers/${value.data.id}` ]);
+  }
 }

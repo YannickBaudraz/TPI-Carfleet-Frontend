@@ -66,7 +66,6 @@ export class VehiclesPageComponent implements OnInit {
   }
 
   async onRowSelected(value: RowSmartTable): Promise<void> {
-    console.log(value);
     await this._router.navigate([ `vehicles/${value.data.id}` ]);
   }
 }

@@ -24,6 +24,7 @@ import { ThemeModule } from '../assets/ngx-admin/@theme/theme.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LayoutComponent } from './layout/layout.component';
+import { DriverDetailPageComponent } from './pages/driver-detail-page/driver-detail-page.component';
 import { DriversPageComponent } from './pages/drivers-page/drivers-page.component';
 import { VehicleDetailPageComponent } from './pages/vehicle-detail-page/vehicle-detail-page.component';
 import { VehiclesPageComponent } from './pages/vehicles-page/vehicles-page.component';
@@ -36,6 +37,7 @@ import { VehiclesPageComponent } from './pages/vehicles-page/vehicles-page.compo
     VehicleDetailPageComponent,
     NotFoundComponent,
     DriversPageComponent,
+    DriverDetailPageComponent,
   ],
   imports: [
     AppRoutingModule,
