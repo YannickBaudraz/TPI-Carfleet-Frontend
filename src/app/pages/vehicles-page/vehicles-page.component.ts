@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
 import { Vehicle } from '../../core/models/backend/dto';
+import { LiteralObject } from '../../core/models/literal-object';
 import { RowSmartTable } from '../../core/models/table/row-smart.table';
 import { ApiService } from '../../core/services/api/api.service';
 import { VehiclePageModel } from './vehicle-page.model';
@@ -13,7 +14,7 @@ import { VehiclePageModel } from './vehicle-page.model';
 })
 export class VehiclesPageComponent implements OnInit {
 
-  settings: Record<string, unknown> = {};
+  settings: LiteralObject;
   private _vehicles: VehiclePageModel[] = [];
 
   constructor(private _apiService: ApiService, private _router: Router) {
