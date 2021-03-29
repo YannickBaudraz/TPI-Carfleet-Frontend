@@ -1,4 +1,4 @@
-@import '../../../assets/ngx-admin/@theme/styles/themes';
+@import '../../assets/ngx-admin/@theme/styles/themes';
 
 @include nb-install-component() {
   ::ng-deep router-outlet + * {

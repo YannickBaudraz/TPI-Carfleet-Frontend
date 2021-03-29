@@ -1,18 +1,22 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { NotFoundComponent } from '../assets/ngx-admin/@theme/components/not-found/not-found.component';
-import { GabaritComponent } from './pages/gabarit/gabarit.component';
+import { LayoutComponent } from './layout/layout.component';
+import { DriverDetailPageComponent } from './pages/driver-detail-page/driver-detail-page.component';
+import { DriversPageComponent } from './pages/drivers-page/drivers-page.component';
 import { VehicleDetailPageComponent } from './pages/vehicle-detail-page/vehicle-detail-page.component';
 import { VehiclesPageComponent } from './pages/vehicles-page/vehicles-page.component';
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: '',
-    component: GabaritComponent,
+    component: LayoutComponent,
     children: [
       { path: 'vehicles', component: VehiclesPageComponent },
       { path: 'vehicles/:id', component: VehicleDetailPageComponent },
-      { path: '', redirectTo: 'vehicles', pathMatch: 'full' },
+      { path: 'drivers', component: DriversPageComponent },
+      { path: 'drivers/:id', component: DriverDetailPageComponent },
+      { path: '', redirectTo: 'drivers', pathMatch: 'full' },
       { path: '**', component: NotFoundComponent, }
     ]
   },

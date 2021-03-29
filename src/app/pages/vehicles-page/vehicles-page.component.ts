@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { PathLink } from '../../core/enums/path-link.enum';
 import { Vehicle } from '../../core/models/backend/dto';
+import { LiteralObject } from '../../core/models/literal-object';
 import { RowSmartTable } from '../../core/models/table/row-smart.table';
 import { ApiService } from '../../core/services/api/api.service';
 import { VehiclePageModel } from './vehicle-page.model';
@@ -13,7 +16,7 @@ import { VehiclePageModel } from './vehicle-page.model';
 })
 export class VehiclesPageComponent implements OnInit {
 
-  settings: Record<string, unknown> = {};
+  settings: LiteralObject;
   private _vehicles: VehiclePageModel[] = [];
 
   constructor(private _apiService: ApiService, private _router: Router) {
@@ -51,7 +54,17 @@ export class VehiclesPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this._apiService.getVehicles().pipe(map((values: Vehicle[]) => values.map((value: Vehicle) => {
+    const vehiclesObservable = this._apiService.getAll(PathLink.VEHICLES) as Observable<Vehicle[]>;
+    vehiclesObservable.pipe(map(this.mapVehicles()))
+                      .subscribe((values: VehiclePageModel[]) => this._vehicles = values);
+  }
+
+  async onRowSelected(value: RowSmartTable): Promise<void> {
+    await this._router.navigate([ `vehicles/${value.data.id}` ]);
+  }
+
+  private mapVehicles(): (values: Vehicle[]) => VehiclePageModel[] {
+    return (values: Vehicle[]) => values.map((value: Vehicle) => {
       const vehiclePageModel: VehiclePageModel = {
         id: value.id,
         companyName: value.driver.company.name,
@@ -61,12 +74,8 @@ export class VehiclesPageComponent implements OnInit {
         priority: value.priority
       };
       return vehiclePageModel;
-    }))).subscribe((values: VehiclePageModel[]) => this._vehicles = values);
+    });
   }
 
-  async onRowSelected(value: RowSmartTable): Promise<void> {
-    console.log(value);
-    await this._router.navigate([ `vehicles/${value.data.id}` ]);
-  }
 }
 

@@ -1,3 +1,4 @@
-export enum PathLinks {
+export enum PathLink {
+  DRIVERS = 'drivers',
   VEHICLES = 'vehicles'
 }

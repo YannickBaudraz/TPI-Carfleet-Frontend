@@ -8,8 +8,12 @@ export interface Company extends AbstractDto {
 
 export interface Driver extends AbstractDto {
   id: number;
+  gender: string;
   firstname: string;
   lastname: string;
+  jobTitle: string;
+  phoneNumber: string;
+  email: string;
   company: Company;
 }
 

@@ -1,0 +1,87 @@
+<nb-card>
+  <nb-card-header>
+    Modifier le contact
+    <button [status]="'primary'" class="float-right" ghost nbButton routerLink="/drivers">< Retourner</button>
+  </nb-card-header>
+  <nb-card-body>
+    <ng-container *ngIf="driver; else noData">
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="companyName">Entreprise</label>
+            <input [value]="driver.company.name" disabled id="companyName" nbInput fullWidth type="text">
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="gender">Choisissez le sexe</label>
+            <input [value]="driver.gender | gender" nbInput fullWidth type="text" disabled id="gender">
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="firstname">Entrez votre prénom</label>
+            <input [value]="driver.firstname" nbInput fullWidth type="text" disabled id="firstname">
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="lastname">Entrez le nom de famille</label>
+            <input [value]="driver.lastname" nbInput fullWidth type="text" disabled id="lastname">
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="jobTitle">Entrez le titre d'emploi</label>
+            <input [value]="driver.jobTitle" nbInput fullWidth type="text" disabled id="jobTitle">
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="language">Choisir la langue</label>
+            <input [value]="'Français'" nbInput fullWidth type="text" disabled id="language">
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="email">Entrez email professionnel</label>
+            <input [value]="driver.email" nbInput fullWidth type="text" disabled id="email">
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="emailPrivate">Entrez email Privé</label>
+            <input [value]="null" nbInput fullWidth type="text" disabled id="emailPrivate">
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="phoneNumber">Entrez téléphone Professionnel</label>
+            <input [value]="driver.phoneNumber" nbInput fullWidth type="text" disabled id="phoneNumber">
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="phoneNumberPrivate">Entrez téléphone privé</label>
+            <input [value]="null" nbInput fullWidth type="text" disabled id="phoneNumberPrivate">
+          </div>
+        </div>
+      </div>
+
+      <button class="float-right" disabled nbButton type="submit">Sauvegarder</button>
+    </ng-container>
+    <ng-template #noData>Le contact n'apparaît pas</ng-template>
+  </nb-card-body>
+</nb-card>

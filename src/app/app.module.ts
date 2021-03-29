@@ -7,8 +7,11 @@ import {
   NbButtonModule,
   NbCardModule,
   NbDatepickerModule,
-  NbDialogModule, NbInputModule, NbLayoutModule,
-  NbMenuModule, NbSelectModule,
+  NbDialogModule,
+  NbInputModule,
+  NbLayoutModule,
+  NbMenuModule,
+  NbSelectModule,
   NbSidebarModule,
   NbToastrModule,
   NbWindowModule
@@ -20,22 +23,29 @@ import { ThemeModule } from '../assets/ngx-admin/@theme/theme.module';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { GabaritComponent } from './pages/gabarit/gabarit.component';
-import { VehiclesPageComponent } from './pages/vehicles-page/vehicles-page.component';
+import { LayoutComponent } from './layout/layout.component';
+import { DriverDetailPageComponent } from './pages/driver-detail-page/driver-detail-page.component';
+import { DriversPageComponent } from './pages/drivers-page/drivers-page.component';
 import { VehicleDetailPageComponent } from './pages/vehicle-detail-page/vehicle-detail-page.component';
+import { VehiclesPageComponent } from './pages/vehicles-page/vehicles-page.component';
+import { GenderPipe } from './pipes/gender/gender.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
-    GabaritComponent,
+    LayoutComponent,
     VehiclesPageComponent,
     VehicleDetailPageComponent,
     NotFoundComponent,
+    DriversPageComponent,
+    DriverDetailPageComponent,
+    GenderPipe,
   ],
   imports: [
     AppRoutingModule,
     BrowserModule,
     BrowserAnimationsModule,
+    FormsModule,
     HttpClientModule,
     // Ngx-Admin
     CoreModule.forRoot(),
@@ -51,8 +61,7 @@ import { VehicleDetailPageComponent } from './pages/vehicle-detail-page/vehicle-
     Ng2SmartTableModule,
     NbLayoutModule,
     NbInputModule,
-    NbSelectModule,
-    FormsModule
+    NbSelectModule
   ],
   providers: [],
   bootstrap: [ AppComponent ]
