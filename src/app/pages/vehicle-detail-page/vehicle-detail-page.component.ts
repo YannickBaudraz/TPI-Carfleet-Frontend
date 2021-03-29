@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
+import { PathLink } from '../../core/enums/path-link.enum';
 import { Vehicle } from '../../core/models/backend/dto';
 import { ApiService } from '../../core/services/api/api.service';
 
@@ -20,7 +22,8 @@ export class VehicleDetailPageComponent implements OnInit {
 
   ngOnInit(): void {
     const id = Number(this._route.snapshot.paramMap.get('id'));
-    this._apiService.getOneVehicle(id).subscribe((value: Vehicle) => this._vehicle = value);
+    const vehicleObservable = this._apiService.getOneById(PathLink.VEHICLES, id) as Observable<Vehicle>;
+    vehicleObservable.subscribe((value: Vehicle) => this._vehicle = value);
   }
 
 }

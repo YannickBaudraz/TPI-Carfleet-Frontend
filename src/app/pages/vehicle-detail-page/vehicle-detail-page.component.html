@@ -4,192 +4,197 @@
     <button [status]="'primary'" class="float-right" ghost nbButton routerLink="/vehicles">< Retourner</button>
   </nb-card-header>
   <nb-card-body>
-    <div class="row">
-      <div class="col-sm-4">
-        <div class="form-group">
-          <label for="statut" class="label">Sélectionner le statut</label>
-          <nb-select disabled fullWidth id="statut" selected="1">
-            <nb-option value="1">Actif</nb-option>
-          </nb-select>
+    <ng-container *ngIf="vehicle; else noData">
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label for="status" class="label">Sélectionner le statut</label>
+            <nb-select disabled fullWidth id="status" selected="1">
+              <nb-option value="1">Actif</nb-option>
+            </nb-select>
+          </div>
+        </div>
+
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label for="licensePlate" class="label">Entrer N° de plaque e.g. (FR 123456)</label>
+            <input [value]="vehicle.licensePlate" disabled fullWidth id="licensePlate" nbInput type="text">
+          </div>
+        </div>
+
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label for="manufacturer" class="label">Sélectionner un fabriquant</label>
+            <nb-select disabled fullWidth id="manufacturer" selected="1">
+              <nb-option value="1">{{ vehicle.manufacturer }}</nb-option>
+            </nb-select>
+          </div>
         </div>
       </div>
 
-      <div class="col-sm-4">
-        <div class="form-group">
-          <label for="inputLastName" class="label">Entrer N° de plaque e.g. (FR 123456)</label>
-          <input [value]="vehicle.licensePlate" disabled fullWidth id="inputLastName" nbInput type="text">
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label for="model" class="label">Entrer le modèle</label>
+            <input [value]="vehicle.model" disabled fullWidth id="model" nbInput type="text">
+          </div>
+        </div>
+
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label for="vin" class="label">Entrer N° de chassis</label>
+            <input [value]="vehicle.vin" disabled type="text" nbInput fullWidth id="vin">
+          </div>
+        </div>
+
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label for="code" class="label">Entrer code véhicule *</label>
+            <input value="---" disabled nbInput fullWidth id="code">
+          </div>
         </div>
       </div>
 
-      <div class="col-sm-4">
-        <div class="form-group">
-          <label for="manufacturer" class="label">Sélectionner un fabriquant</label>
-          <nb-select disabled fullWidth id="manufacturer" selected="1">
-            <nb-option value="1">{{ vehicle.manufacturer }}</nb-option>
-          </nb-select>
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label for="exteriorColor" class="label">Entrer couler extérieur</label>
+            <input [value]="vehicle.exteriorColor" disabled fullWidth id="exteriorColor" nbInput type="text">
+          </div>
         </div>
-      </div>
-    </div>
 
-    <div class="row">
-      <div class="col-sm-4">
-        <div class="form-group">
-          <label for="model" class="label">Entrer le modèle</label>
-          <input [value]="vehicle.model" disabled fullWidth id="model" nbInput type="text">
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label for="registration" class="label">Entrer N° de matricule</label>
+            <input [value]="vehicle.registration" disabled fullWidth id="registration" nbInput type="text">
+          </div>
         </div>
-      </div>
 
-      <div class="col-sm-4">
-        <div class="form-group">
-          <label for="vin" class="label">Entrer N° de chassis</label>
-          <input [value]="vehicle.vin" disabled type="text" nbInput fullWidth id="vin">
-        </div>
-      </div>
-
-      <div class="col-sm-4">
-        <div class="form-group">
-          <label for="code" class="label">Entrer code véhicule *</label>
-          <input value="---" disabled nbInput fullWidth id="code">
-        </div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-sm-4">
-        <div class="form-group">
-          <label for="exteriorColor" class="label">Entrer couler extérieur</label>
-          <input [value]="vehicle.exteriorColor" disabled fullWidth id="exteriorColor" nbInput type="text">
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label for="type" class="label">Entrer reception par type</label>
+            <input [value]="vehicle.type" disabled nbInput fullWidth id="type">
+          </div>
         </div>
       </div>
 
-      <div class="col-sm-4">
-        <div class="form-group">
-          <label for="registration" class="label">Entrer N° de matricule</label>
-          <input [value]="vehicle.registration" disabled fullWidth id="registration" nbInput type="text">
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label for="introductionl" class="label">Entrer mise en circulation</label>
+            <input [nbDatepicker]="datepicker"
+                   [value]="vehicle.introductionl"
+                   disabled
+                   fullWidth
+                   id="introductionl"
+                   nbInput
+            >
+            <nb-datepicker #datepicker></nb-datepicker>
+          </div>
+        </div>
+
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label for="insurance" class="label">Entrer Assurance</label>
+            <input [value]="vehicle.insurance" disabled type="text" nbInput fullWidth id="insurance">
+          </div>
+        </div>
+
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label for="engineNumber" class="label">Entrer N° de moteur</label>
+            <input value="---" disabled nbInput fullWidth id="engineNumber">
+          </div>
         </div>
       </div>
 
-      <div class="col-sm-4">
-        <div class="form-group">
-          <label for="type" class="label">Entrer reception par type</label>
-          <input [value]="vehicle.type" disabled nbInput fullWidth id="type">
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label for="fuel" class="label">Entrer Carburant</label>
+            <input [value]="vehicle.fuel" disabled fullWidth id="fuel" nbInput type="text">
+          </div>
         </div>
-      </div>
-    </div>
 
-    <div class="row">
-      <div class="col-sm-4">
-        <div class="form-group">
-          <label for="introductionl" class="label">Entrer mise en circulation</label>
-          <input [nbDatepicker]="datepicker"
-                 [value]="vehicle.introductionl"
-                 disabled
-                 fullWidth
-                 id="introductionl"
-                 nbInput
-          >
-          <nb-datepicker #datepicker></nb-datepicker>
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label for="transmission" class="label">Entrer Type de boite</label>
+            <input [value]="vehicle.transmission" disabled type="text" nbInput fullWidth id="transmission">
+          </div>
         </div>
-      </div>
 
-      <div class="col-sm-4">
-        <div class="form-group">
-          <label for="insurance" class="label">Entrer Assurance</label>
-          <input [value]="vehicle.insurance" disabled type="text" nbInput fullWidth id="insurance">
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label for="priority" class="label">Entrer Priorité</label>
+            <input [value]="vehicle.priority" disabled fullWidth id="priority" nbInput>
+          </div>
         </div>
       </div>
 
-      <div class="col-sm-4">
-        <div class="form-group">
-          <label for="engineNumber" class="label">Entrer N° de moteur</label>
-          <input value="---" disabled nbInput fullWidth id="engineNumber">
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label for="driver" class="label">Sélectionner Conducteur</label>
+            <input [value]="vehicle.driver.firstname + ' ' + vehicle.driver.lastname"
+                   disabled
+                   fullWidth
+                   id="driver"
+                   nbInput
+                   type="text">
+          </div>
         </div>
-      </div>
-    </div>
 
-    <div class="row">
-      <div class="col-sm-4">
-        <div class="form-group">
-          <label for="fuel" class="label">Entrer Carburant</label>
-          <input [value]="vehicle.fuel" disabled fullWidth id="fuel" nbInput type="text">
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label for="company" class="label">Entrer l'entreprise</label>
+            <input [value]="vehicle.driver.company.name" disabled type="text" nbInput fullWidth id="company">
+          </div>
         </div>
-      </div>
 
-      <div class="col-sm-4">
-        <div class="form-group">
-          <label for="transmission" class="label">Entrer Type de boite</label>
-          <input [value]="vehicle.transmission" disabled type="text" nbInput fullWidth id="transmission">
-        </div>
-      </div>
-
-      <div class="col-sm-4">
-        <div class="form-group">
-          <label for="priority" class="label">Entrer Priorité</label>
-          <input [value]="vehicle.priority" disabled fullWidth id="priority" nbInput>
-        </div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-sm-4">
-        <div class="form-group">
-          <label for="driver" class="label">Sélectionner Conducteur</label>
-          <input [value]="vehicle.driver.firstname + ' ' + vehicle.driver.lastname"
-                 disabled
-                 fullWidth
-                 id="driver"
-                 nbInput
-                 type="text">
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label for="department" class="label">Entrer département</label>
+            <input disabled fullWidth id="department" nbInput>
+          </div>
         </div>
       </div>
 
-      <div class="col-sm-4">
-        <div class="form-group">
-          <label for="company" class="label">Entrer l'entreprise</label>
-          <input [value]="vehicle.driver.company.name" disabled type="text" nbInput fullWidth id="company">
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label for="diagnosis" class="label">Sélectionnez Diagnostic</label>
+            <input [value]="vehicle.diagnosis" disabled fullWidth id="diagnosis" nbInput type="text">
+          </div>
+        </div>
+
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label for="support" class="label">Vérifier Prise en charge</label>
+            <input [value]="vehicle.support" disabled type="text" nbInput fullWidth id="support">
+          </div>
+        </div>
+
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label for="vehiclescol" class="label">Entrer consommation</label>
+            <input [value]="vehicle.vehiclescol" disabled fullWidth id="vehiclescol" nbInput>
+          </div>
         </div>
       </div>
 
-      <div class="col-sm-4">
-        <div class="form-group">
-          <label for="department" class="label">Entrer département</label>
-          <input disabled fullWidth id="department" nbInput>
-        </div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-sm-4">
-        <div class="form-group">
-          <label for="diagnosis" class="label">Sélectionnez Diagnostic</label>
-          <input [value]="vehicle.diagnosis" disabled fullWidth id="diagnosis" nbInput type="text">
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label for="notes">Entrer Notes</label>
+            <textarea disabled id="notes" fullWidth nbInput rows="5">{{ vehicle.notes }}</textarea>
+          </div>
         </div>
       </div>
 
-      <div class="col-sm-4">
-        <div class="form-group">
-          <label for="support" class="label">Vérifier Prise en charge</label>
-          <input [value]="vehicle.support" disabled type="text" nbInput fullWidth id="support">
-        </div>
-      </div>
-
-      <div class="col-sm-4">
-        <div class="form-group">
-          <label for="vehiclescol" class="label">Entrer consommation</label>
-          <input [value]="vehicle.vehiclescol" disabled fullWidth id="vehiclescol" nbInput>
-        </div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-sm-4">
-        <div class="form-group">
-          <label for="notes">Entrer Notes</label>
-          <textarea disabled id="notes" fullWidth nbInput rows="5">{{ vehicle.notes }}</textarea>
-        </div>
-      </div>
-    </div>
-
-    <button class="float-right" disabled nbButton type="submit">Sauvegarder</button>
+      <button class="float-right" disabled nbButton type="submit">Sauvegarder</button>
+    </ng-container>
+    <ng-template #noData>
+      <p>Le véhicule recherché n'apparaît pas.</p>
+    </ng-template>
   </nb-card-body>
 </nb-card>

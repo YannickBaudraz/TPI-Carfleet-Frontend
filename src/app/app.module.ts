@@ -28,6 +28,7 @@ import { DriverDetailPageComponent } from './pages/driver-detail-page/driver-det
 import { DriversPageComponent } from './pages/drivers-page/drivers-page.component';
 import { VehicleDetailPageComponent } from './pages/vehicle-detail-page/vehicle-detail-page.component';
 import { VehiclesPageComponent } from './pages/vehicles-page/vehicles-page.component';
+import { GenderPipe } from './pipes/gender/gender.pipe';
 
 @NgModule({
   declarations: [
@@ -38,11 +39,13 @@ import { VehiclesPageComponent } from './pages/vehicles-page/vehicles-page.compo
     NotFoundComponent,
     DriversPageComponent,
     DriverDetailPageComponent,
+    GenderPipe,
   ],
   imports: [
     AppRoutingModule,
     BrowserModule,
     BrowserAnimationsModule,
+    FormsModule,
     HttpClientModule,
     // Ngx-Admin
     CoreModule.forRoot(),
@@ -58,8 +61,7 @@ import { VehiclesPageComponent } from './pages/vehicles-page/vehicles-page.compo
     Ng2SmartTableModule,
     NbLayoutModule,
     NbInputModule,
-    NbSelectModule,
-    FormsModule
+    NbSelectModule
   ],
   providers: [],
   bootstrap: [ AppComponent ]

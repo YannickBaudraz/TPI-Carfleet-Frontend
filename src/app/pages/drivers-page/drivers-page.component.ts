@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { PathLink } from '../../core/enums/path-link.enum';
 import { Driver } from '../../core/models/backend/dto';
 import { LiteralObject } from '../../core/models/literal-object';
 import { RowSmartTable } from '../../core/models/table/row-smart.table';
@@ -52,7 +54,17 @@ export class DriversPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this._apiService.getDrivers().pipe(map((values: Driver[]) => values.map((value: Driver) => {
+    const driversObservable = this._apiService.getAll(PathLink.DRIVERS) as Observable<Driver[]>;
+    driversObservable.pipe(map(this.mapDrivers()))
+                     .subscribe((values: DriverPageModel[]) => this._drivers = values);
+  }
+
+  async onRowSelected(value: RowSmartTable): Promise<void> {
+    await this._router.navigate([ `drivers/${value.data.id}` ]);
+  }
+
+  private mapDrivers(): (values: Driver[]) => DriverPageModel[] {
+    return (values: Driver[]) => values.map((value: Driver) => {
       const vehiclePageModel: DriverPageModel = {
         id: value.id,
         companyName: value.company.name,
@@ -62,10 +74,7 @@ export class DriversPageComponent implements OnInit {
         email: value.email
       };
       return vehiclePageModel;
-    }))).subscribe((values: DriverPageModel[]) => this._drivers = values);
+    });
   }
 
-  async onRowSelected(value: RowSmartTable): Promise<void> {
-    await this._router.navigate([ `drivers/${value.data.id}` ]);
-  }
 }

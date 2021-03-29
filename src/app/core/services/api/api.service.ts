@@ -3,32 +3,45 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import { API_DRIVERS_URL, API_VEHICLES_URL } from '../../constants';
+import { PathLink } from '../../enums/path-link.enum';
 import { BackendResponse } from '../../models/backend/backend-response';
-import { Driver, Vehicle } from '../../models/backend/dto';
+import { AbstractDto } from '../../models/backend/dto';
 
 @Injectable({ providedIn: 'root' })
 export class ApiService {
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private _httpClient: HttpClient) { }
 
-  getDrivers(): Observable<Driver[]> {
-    return this.httpClient.get<BackendResponse>(API_DRIVERS_URL).pipe(
+  private static getUrlByDtoType(pathLink: PathLink): string {
+    let apiUrl: string;
+
+    switch (pathLink) {
+      case PathLink.DRIVERS:
+        apiUrl = API_DRIVERS_URL;
+        break;
+      case PathLink.VEHICLES:
+        apiUrl = API_VEHICLES_URL;
+        break;
+    }
+
+    return apiUrl;
+  }
+
+  getAll(pathLink: PathLink): Observable<AbstractDto[]> {
+    const requestUrl = ApiService.getUrlByDtoType(pathLink);
+
+    return this._httpClient.get<BackendResponse>(requestUrl + '/all').pipe(
       take(1),
-      map((response: BackendResponse) => response.data as Driver[])
+      map((response: BackendResponse) => response.data as AbstractDto[])
     );
   }
 
-  getVehicles(): Observable<Vehicle[]> {
-    return this.httpClient.get<BackendResponse>(API_VEHICLES_URL).pipe(
-      take(1),
-      map((response: BackendResponse) => response.data as Vehicle[])
-    );
-  }
+  getOneById(pathLink: PathLink, id: number): Observable<AbstractDto> {
+    const requestUrl = `${ApiService.getUrlByDtoType(pathLink)}/${id}`;
 
-  getOneVehicle(id: number): Observable<Vehicle> {
-    return this.httpClient.get<BackendResponse>(`${API_VEHICLES_URL}/${id}`).pipe(
+    return this._httpClient.get<BackendResponse>(`${requestUrl}`).pipe(
       take(1),
-      map(response => response.data as Vehicle)
+      map(response => response.data as AbstractDto)
     );
   }
 }

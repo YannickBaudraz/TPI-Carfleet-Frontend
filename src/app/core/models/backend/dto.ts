@@ -11,6 +11,7 @@ export interface Driver extends AbstractDto {
   gender: string;
   firstname: string;
   lastname: string;
+  jobTitle: string;
   phoneNumber: string;
   email: string;
   company: Company;
