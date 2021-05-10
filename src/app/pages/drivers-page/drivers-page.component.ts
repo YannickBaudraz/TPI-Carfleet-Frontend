@@ -16,11 +16,17 @@ import { DriverPageModel } from './driver-page.model';
 })
 export class DriversPageComponent implements OnInit {
 
-  settings: LiteralObject;
+  private readonly _settings: LiteralObject;
   private _drivers: DriverPageModel[] = [];
 
+  /**
+   * Initialize the component.
+   *
+   * @param _apiService - The service that make HTTP request to the api
+   * @param _router - The router
+   */
   constructor(private _apiService: ApiService, private _router: Router) {
-    this.settings = {
+    this._settings = {
       actions: null,
       noDataMessage: 'Aucun contacts trouvé',
       mode: 'external',
@@ -49,18 +55,36 @@ export class DriversPageComponent implements OnInit {
     };
   }
 
+  //region Accessors
+  /**
+   * Settings for the smart-table.
+   */
+  get settings(): LiteralObject {
+    return this._settings;
+  }
+
+  /**
+   * Drivers to use in the table.
+   */
   get drivers(): DriverPageModel[] {
     return this._drivers;
   }
+  //endregion
 
+  //region Methods
   ngOnInit(): void {
     const driversObservable = this._apiService.getAll(PathLink.DRIVERS) as Observable<Driver[]>;
     driversObservable.pipe(map(this.mapDrivers()))
                      .subscribe((values: DriverPageModel[]) => this._drivers = values);
   }
 
-  async onRowSelected(value: RowSmartTable): Promise<void> {
-    await this._router.navigate([ `drivers/${value.data.id}` ]);
+  /**
+   * Event when a row is selected.
+   *
+   * @param row - The row of the table
+   */
+  async onRowSelected(row: RowSmartTable): Promise<void> {
+    await this._router.navigate([ `drivers/${row.data.id}` ]);
   }
 
   private mapDrivers(): (values: Driver[]) => DriverPageModel[] {
@@ -76,5 +100,6 @@ export class DriversPageComponent implements OnInit {
       return vehiclePageModel;
     });
   }
+  //endregion
 
 }

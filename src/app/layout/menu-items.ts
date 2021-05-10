@@ -11,5 +11,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
     title: 'Véhicules',
     icon: 'car-outline',
     link: '/vehicles',
+  },
+  {
+    title: 'Entreprises',
+    icon: 'briefcase-outline',
+    link: '/companies',
   }
 ];

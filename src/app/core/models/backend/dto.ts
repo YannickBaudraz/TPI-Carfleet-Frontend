@@ -4,6 +4,11 @@ export abstract class AbstractDto {
 export interface Company extends AbstractDto {
   id: number;
   name: string;
+  address: string;
+  city: string;
+  zip: string;
+  phone: string;
+  email: string;
 }
 
 export interface Driver extends AbstractDto {

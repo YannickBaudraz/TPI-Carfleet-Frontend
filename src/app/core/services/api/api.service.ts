@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
-import { API_DRIVERS_URL, API_VEHICLES_URL } from '../../constants';
+import { API_COMPANIES_URL, API_DRIVERS_URL, API_VEHICLES_URL } from '../../constants';
 import { PathLink } from '../../enums/path-link.enum';
 import { BackendResponse } from '../../models/backend/backend-response';
 import { AbstractDto } from '../../models/backend/dto';
@@ -13,7 +13,7 @@ export class ApiService {
   constructor(private _httpClient: HttpClient) { }
 
   private static getUrlByDtoType(pathLink: PathLink): string {
-    let apiUrl: string;
+    let apiUrl = '';
 
     switch (pathLink) {
       case PathLink.DRIVERS:
@@ -21,6 +21,9 @@ export class ApiService {
         break;
       case PathLink.VEHICLES:
         apiUrl = API_VEHICLES_URL;
+        break;
+      case PathLink.COMPANIES:
+        apiUrl = API_COMPANIES_URL;
         break;
     }
 

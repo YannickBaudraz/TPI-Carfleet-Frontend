@@ -1,11 +1,11 @@
 <nb-card>
   <nb-card-header>
-    Liste des contacts enregistrés
+    Liste des entreprises enregistrées
   </nb-card-header>
 
   <nb-card-body>
     <ng2-smart-table [settings]="settings"
-                     [source]="drivers"
+                     [source]="companies"
                      (userRowSelect)="onRowSelected($event)"
     ></ng2-smart-table>
   </nb-card-body>
