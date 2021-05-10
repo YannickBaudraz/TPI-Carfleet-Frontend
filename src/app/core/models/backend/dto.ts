@@ -7,8 +7,11 @@ export interface Company extends AbstractDto {
   address: string;
   city: string;
   zip: string;
+  canton: string;
   phone: string;
   email: string;
+  websiteUrl: string;
+  color: string;
 }
 
 export interface Driver extends AbstractDto {
