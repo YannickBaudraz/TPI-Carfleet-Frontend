@@ -3,22 +3,34 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { PathLink } from '../../core/enums/path-link.enum';
-import { Company } from '../../core/models/backend/dto';
+import { CompanyDto } from '../../core/models/backend/data-transfer-object';
 import { LiteralObject } from '../../core/models/literal-object';
 import { RowSmartTable } from '../../core/models/table/row-smart.table';
 import { ApiService } from '../../core/services/api/api.service';
-import { CompanyPageModel } from './company-page.model';
+import { CompanyViewModel } from './company-view.model';
 
+/**
+ * View of the companies list.
+ */
 @Component({
   selector: 'app-companies-page',
-  templateUrl: './companies-page.component.html',
-  styleUrls: [ './companies-page.component.scss' ]
+  templateUrl: './companies-view.component.html',
+  styleUrls: [ './companies-view.component.scss' ]
 })
-export class CompaniesPageComponent implements OnInit {
+export class CompaniesViewComponent implements OnInit {
 
+  //region Fields
   private readonly _settings: LiteralObject;
-  private _companies: CompanyPageModel[] = [];
+  private _companies: CompanyViewModel[] = [];
+  //endregion
 
+  //region Constructor
+  /**
+   * Initialize a companies view component.
+   *
+   * @param _apiService - The service that make HTTP request to the api
+   * @param _router - The router service.
+   */
   constructor(private _apiService: ApiService, private _router: Router) {
     this._settings = {
       actions: null,
@@ -48,28 +60,49 @@ export class CompaniesPageComponent implements OnInit {
       }
     };
   }
+  //endregion
 
+  //region Accessors
+  /**
+   * Settings for the smart-table.
+   */
   get settings(): LiteralObject {
     return this._settings;
   }
 
-  get companies(): CompanyPageModel[] {
+  /**
+   * Companies to use in the table.
+   */
+  get companies(): CompanyViewModel[] {
     return this._companies;
   }
+  //endregion
 
+  //region Methods
+  //region Public methods
+  /**
+   * Additional initialization tasks.
+   */
   ngOnInit(): void {
-    const companiesObservable = this._apiService.getAll(PathLink.COMPANIES) as Observable<Company[]>;
+    const companiesObservable = this._apiService.getAll(PathLink.COMPANIES) as Observable<CompanyDto[]>;
     companiesObservable.pipe(map(this.mapCompanies()))
-                       .subscribe((values: CompanyPageModel[]) => this._companies = values);
+                       .subscribe((values: CompanyViewModel[]) => this._companies = values);
   }
 
+  /**
+   * Event when a row is selected.
+   *
+   * @param row - The row of the table
+   */
   async onRowSelected(row: RowSmartTable): Promise<void> {
     await this._router.navigate([ `${PathLink.COMPANIES}/${row.data.id}` ]);
   }
+  //endregion
 
-  private mapCompanies(): (values: Company[]) => CompanyPageModel[] {
-    return (values: Company[]) => values.map((value: Company) => {
-      const companyPageModel: CompanyPageModel = {
+  //region Private methods
+  private mapCompanies(): (values: CompanyDto[]) => CompanyViewModel[] {
+    return (values: CompanyDto[]) => values.map((value: CompanyDto) => {
+      const companyPageModel: CompanyViewModel = {
         id: value.id,
         name: value.name,
         address: value.address,
@@ -80,4 +113,6 @@ export class CompaniesPageComponent implements OnInit {
       return companyPageModel;
     });
   }
+  //endregion
+  //endregion
 }

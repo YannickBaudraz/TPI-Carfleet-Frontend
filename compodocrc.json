@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/@compodoc/compodoc/src/config/schema.json",
-  "tsconfig": "tsconfig.json",
+  "tsconfig": "tsconfig.compodoc.json",
   "output": "documentation",
   "name": "Carfleet front-end documentation",
   "theme": "stripe",

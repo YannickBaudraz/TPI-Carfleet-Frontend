@@ -3,24 +3,30 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { PathLink } from '../../core/enums/path-link.enum';
-import { Driver } from '../../core/models/backend/dto';
+import { DriverDto } from '../../core/models/backend/data-transfer-object';
 import { LiteralObject } from '../../core/models/literal-object';
 import { RowSmartTable } from '../../core/models/table/row-smart.table';
 import { ApiService } from '../../core/services/api/api.service';
-import { DriverPageModel } from './driver-page.model';
+import { DriverViewModel } from './driver-view.model';
 
+/**
+ * View of the drivers list.
+ */
 @Component({
   selector: 'app-drivers-page',
-  templateUrl: './drivers-page.component.html',
-  styleUrls: [ './drivers-page.component.scss' ]
+  templateUrl: './drivers-view.component.html',
+  styleUrls: [ './drivers-view.component.scss' ]
 })
-export class DriversPageComponent implements OnInit {
+export class DriversViewComponent implements OnInit {
 
+  //region Fields
   private readonly _settings: LiteralObject;
-  private _drivers: DriverPageModel[] = [];
+  private _drivers: DriverViewModel[] = [];
+  //endregion
 
+  //region Constructor
   /**
-   * Initialize the component.
+   * Initialize a drivers view component.
    *
    * @param _apiService - The service that make HTTP request to the api
    * @param _router - The router
@@ -54,6 +60,7 @@ export class DriversPageComponent implements OnInit {
       }
     };
   }
+  //endregion
 
   //region Accessors
   /**
@@ -66,16 +73,20 @@ export class DriversPageComponent implements OnInit {
   /**
    * Drivers to use in the table.
    */
-  get drivers(): DriverPageModel[] {
+  get drivers(): DriverViewModel[] {
     return this._drivers;
   }
   //endregion
 
   //region Methods
+  //region Public methods
+  /**
+   * Additional initialization tasks.
+   */
   ngOnInit(): void {
-    const driversObservable = this._apiService.getAll(PathLink.DRIVERS) as Observable<Driver[]>;
+    const driversObservable = this._apiService.getAll(PathLink.DRIVERS) as Observable<DriverDto[]>;
     driversObservable.pipe(map(this.mapDrivers()))
-                     .subscribe((values: DriverPageModel[]) => this._drivers = values);
+                     .subscribe((values: DriverViewModel[]) => this._drivers = values);
   }
 
   /**
@@ -84,12 +95,14 @@ export class DriversPageComponent implements OnInit {
    * @param row - The row of the table
    */
   async onRowSelected(row: RowSmartTable): Promise<void> {
-    await this._router.navigate([ `drivers/${row.data.id}` ]);
+    await this._router.navigate([ `${PathLink.DRIVERS}/${row.data.id}` ]);
   }
+  //endregion
 
-  private mapDrivers(): (values: Driver[]) => DriverPageModel[] {
-    return (values: Driver[]) => values.map((value: Driver) => {
-      const vehiclePageModel: DriverPageModel = {
+  //region Private methods
+  private mapDrivers(): (values: DriverDto[]) => DriverViewModel[] {
+    return (values: DriverDto[]) => values.map((value: DriverDto) => {
+      const vehiclePageModel: DriverViewModel = {
         id: value.id,
         companyName: value.company.name,
         firstname: value.firstname,
@@ -100,6 +113,7 @@ export class DriversPageComponent implements OnInit {
       return vehiclePageModel;
     });
   }
+  //endregion
   //endregion
 
 }
