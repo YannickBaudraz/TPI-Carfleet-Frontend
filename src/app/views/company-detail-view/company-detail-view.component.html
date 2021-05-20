@@ -1,0 +1,81 @@
+<nb-card>
+  <nb-card-header>
+    Modifier l'entreprise
+    <button [status]="'primary'" class="float-right" ghost nbButton routerLink="/companies">< Retourner</button>
+  </nb-card-header>
+
+  <nb-card-body>
+    <ng-container *ngIf="company; else noData">
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label class="label" for="name">Entrez le nom de l'entreprise</label>
+            <input [value]="company.name" disabled fullWidth id="name" nbInput type="text">
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label class="label" for="address">Entrez l'adresse</label>
+            <input [value]="company.address" disabled fullWidth id="address" nbInput type="text">
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label class="label" for="zip">Entrez le code postal</label>
+            <input [value]="company.zip" disabled fullWidth id="zip" nbInput type="text">
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label class="label" for="city">Entrez la ville</label>
+            <input [value]="company.city" disabled fullWidth id="city" nbInput type="text">
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label class="label" for="canton">Entrez le canton</label>
+            <input [value]="company.canton" disabled fullWidth id="canton" nbInput type="text">
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label class="label" for="email">Entrez l'email</label>
+            <input [value]="company.email" disabled fullWidth id="email" nbInput type="email">
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label class="label" for="phone">Entrez le numéro de téléphone</label>
+            <input [value]="company.phone" disabled fullWidth id="phone" nbInput type="text">
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label class="label" for="websiteUrl">Entrez l'url de l'entreprise</label>
+            <input [value]="company.websiteUrl" disabled fullWidth id="websiteUrl" nbInput type="email">
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label class="label" for="color">Entrez la couleur</label>
+            <input [value]="company.color | uppercase" disabled fullWidth id="color" nbInput type="text"
+                   [defaultValue]="'#DDDDDD'">
+          </div>
+        </div>
+      </div>
+
+      <button class="float-right" disabled nbButton type="submit">Sauvegarder</button>
+    </ng-container>
+
+    <ng-template #noData>L'entreprise recherchée n'apparait pas</ng-template>
+  </nb-card-body>
+</nb-card>

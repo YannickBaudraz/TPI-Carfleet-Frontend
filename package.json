@@ -9,7 +9,9 @@
     "test": "ng test",
     "validate": "ng lint",
     "format": "ng lint --fix",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "generate:doc": "rimraf /documentation && compodoc --config compodocrc.json",
+    "generate:doc:serve": "rimraf /documentation && compodoc --config compodocrc.json --serve --open --port 51002"
   },
   "private": true,
   "dependencies": {
