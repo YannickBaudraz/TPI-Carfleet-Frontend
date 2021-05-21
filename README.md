@@ -1,4 +1,4 @@
-# CarFleet front end v0.1.0
+# CarFleet front end v0.2.0
 
 Front-end application of CarFleet.
 
@@ -20,9 +20,18 @@ flag for a production build.
 
 Simply run application and navigate with the browser.
 
+Usage videos :
+
+- [Companies](https://youtu.be/Uj-ytaJhz1I)
+- [Company detail](https://youtu.be/YVXg963OmCQ)
+
 ## Documentation
 
-None currently.
+Run yarn generate:doc to generate API documentation in the folder documentation.
+
+The command yarn generate:doc:serve starts a server at the port 51001 and open the doc in the default browser after the generation is complete.
+
+The doc will not be committed with git.
 
 ## Development server
 
@@ -38,3 +47,10 @@ Run `yarn test` to execute the unit tests via [Karma](https://karma-runner.githu
 ### End-to-end tests
 
 Run `yarn e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+
+### Fix vulnerabilities dependencies
+
+Use the command `yarn-audit-fix` to fix the vulnerabilities of dependencies.
+
+If it doesn't work, please refer to this [link](https://stackoverflow.com/a/60878037) and fix the rest manually if 
+necessary.
