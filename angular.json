@@ -62,7 +62,8 @@
             "scripts": [
             ],
             "allowedCommonJsDependencies": [
-              "style-loader!leaflet/dist/leaflet.css"
+              "style-loader!leaflet/dist/leaflet.css",
+              "lodash"
             ]
           },
           "configurations": {
@@ -76,7 +77,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
@@ -84,13 +84,13 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumWarning": "1mb",
+                  "maximumError": "2.5mb"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
+                  "maximumWarning": "5kb",
+                  "maximumError": "10kb"
                 }
               ]
             }
