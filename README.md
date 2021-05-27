@@ -1,6 +1,6 @@
 # CarFleet front end v0.2.0
 
-Front-end application of CarFleet.
+This is the front-end application of CarFleet.
 
 ### Prerequisites
 
@@ -38,7 +38,24 @@ The doc will not be committed with git.
 Run `yarn start:dev` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you
 change any of the source files.
 
+Navigate to `http://localhost:4200/`.
+
+### Production server
+
+Run `yarn start` for a production server.
+
+Navigate to `http://localhost:4200/`.
+
+## Documentation
+
+Run `yarn gerenate:doc` to generate API documentation in the folder _documentation_.
+
+The command `yarn generate:doc:serve` starts a server at the port 51002 and open the doc in the default browser
+after the generation is complete.
+
 ## Tests
+
+_There is only basic tests of the front-end application._
 
 ### Unit tests
 

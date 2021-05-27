@@ -24,22 +24,26 @@ import { ThemeModule } from '../assets/ngx-admin/@theme/theme.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LayoutComponent } from './layout/layout.component';
-import { DriverDetailPageComponent } from './pages/driver-detail-page/driver-detail-page.component';
-import { DriversPageComponent } from './pages/drivers-page/drivers-page.component';
-import { VehicleDetailPageComponent } from './pages/vehicle-detail-page/vehicle-detail-page.component';
-import { VehiclesPageComponent } from './pages/vehicles-page/vehicles-page.component';
 import { GenderPipe } from './pipes/gender/gender.pipe';
+import { CompaniesViewComponent } from './views/companies-view/companies-view.component';
+import { CompanyDetailViewComponent } from './views/company-detail-view/company-detail-view.component';
+import { DriverDetailViewComponent } from './views/driver-detail-page/driver-detail-view.component';
+import { DriversViewComponent } from './views/drivers-page/drivers-view.component';
+import { VehicleDetailViewComponent } from './views/vehicle-detail-page/vehicle-detail-view.component';
+import { VehiclesViewComponent } from './views/vehicles-page/vehicles-view.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LayoutComponent,
-    VehiclesPageComponent,
-    VehicleDetailPageComponent,
+    VehiclesViewComponent,
+    VehicleDetailViewComponent,
     NotFoundComponent,
-    DriversPageComponent,
-    DriverDetailPageComponent,
+    DriversViewComponent,
+    DriverDetailViewComponent,
     GenderPipe,
+    CompaniesViewComponent,
+    CompanyDetailViewComponent,
   ],
   imports: [
     AppRoutingModule,
