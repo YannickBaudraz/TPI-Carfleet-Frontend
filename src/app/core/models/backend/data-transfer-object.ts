@@ -1,4 +1,6 @@
-import { Gender } from '../../enums/gender';
+import { GenderEnum } from '../../enums/gender.enum';
+import { UserRole } from '../../enums/user-role.enum';
+import { UserStatus } from '../../enums/user-status.enum';
 
 /**
  * DTO received from the backend. Designed to be the parent of DTOs.
@@ -70,9 +72,9 @@ export interface CompanyDto extends DataTransferObject {
  */
 export interface DriverDto extends DataTransferObject {
   /**
-   * Gender.
+   * GenderEnum.
    */
-  gender: Gender;
+  gender: GenderEnum;
 
   /**
    * Firstname.
@@ -193,4 +195,44 @@ export interface VehicleDto extends DataTransferObject {
    * Driver data transfer object.
    */
   driver: DriverDto;
+}
+
+/**
+ * User received from the backend.
+ */
+export interface UserDto extends DataTransferObject {
+  /**
+   * Firstname.
+   */
+  firstname: string;
+
+  /**
+   * Lastname.
+   */
+  lastname: string;
+
+  /**
+   * Email address.
+   */
+  email: string;
+
+  /**
+   * User role.
+   */
+  role: UserRole | null;
+
+  /**
+   * Language.
+   */
+  language: string;
+
+  /**
+   * User status.
+   */
+  status: UserStatus | null;
+
+  /**
+   * Company Data Transfer Object.
+   */
+  company: CompanyDto;
 }

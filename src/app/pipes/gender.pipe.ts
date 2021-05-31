@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Gender } from '../../core/enums/gender';
+import { GenderEnum } from '../core/enums/gender.enum';
 
 /**
  * A pipe to transform a gender enum to an human readable string.
@@ -14,8 +14,8 @@ export class GenderPipe implements PipeTransform {
    *
    * @param value - The enum
    */
-  transform(value: Gender): string {
-    return value === Gender.M ? 'Homme' : 'Femme';
+  transform(value: GenderEnum): string {
+    return value === GenderEnum.M ? 'Homme' : 'Femme';
   }
 
 }

@@ -22,8 +22,16 @@ Simply run application and navigate with the browser.
 
 Usage videos :
 
+### Companies
+
 - [Companies](https://youtu.be/Uj-ytaJhz1I)
 - [Company detail](https://youtu.be/YVXg963OmCQ)
+
+### Users
+
+- [Users coming soon...]()
+- [Create a new user coming soon...]()
+- [Edit an user coming soon...]()
 
 ## Documentation
 

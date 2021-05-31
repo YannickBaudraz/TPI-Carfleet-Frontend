@@ -11,7 +11,7 @@ import { Title } from '@angular/platform-browser';
 })
 export class AppComponent {
   /**
-   * Initialize the component.
+   * Instantiate the component.
    *
    * @param titleService - Service to set the title of the page
    */

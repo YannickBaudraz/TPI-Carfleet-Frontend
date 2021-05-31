@@ -1,0 +1,154 @@
+<nb-card>
+  <nb-card-header>
+    <span *ngIf="mode === ViewMode.Create">Ajouter un nouvel utilisateur</span>
+    <span *ngIf="mode === ViewMode.Edit">Modifier l'utilisateur</span>
+    <button [status]="'primary'" class="float-right" ghost nbButton routerLink="/users">< Retourner</button>
+  </nb-card-header>
+
+  <nb-card-body>
+    <ng-container *ngIf="mode === ViewMode.Edit && !!user || mode === ViewMode.Create; else noData">
+      <div class="row">
+        <!--region Firstname -->
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label class="label" for="firstname">Entrez le prénom</label>
+            <input (ngModelChange)="user.firstname=$event"
+                   [ngModel]="user?.firstname"
+                   fullWidth
+                   id="firstname"
+                   name="user.firstname"
+                   nbInput
+                   type="text"
+            >
+          </div>
+        </div>
+        <!--endregion-->
+
+        <!--region Lastname -->
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label class="label" for="lastname">Entrez le nom de famille</label>
+            <input (ngModelChange)="user.lastname=$event"
+                   [ngModel]="user?.lastname"
+                   fullWidth
+                   id="lastname"
+                   nbInput
+                   type="text"
+            >
+          </div>
+        </div>
+        <!--endregion-->
+      </div>
+
+      <!--region Email -->
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <label class="label" for="email">Entrez l'email</label>
+            <input (ngModelChange)="user.email=$event"
+                   [ngModel]="user?.email"
+                   fullWidth
+                   id="email"
+                   nbInput
+                   required
+                   type="email"
+            >
+          </div>
+        </div>
+      </div>
+      <!--endregion-->
+
+      <div class="row">
+        <!--region Role -->
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="role" class="label">Choisissez le rôle</label>
+            <nb-select (ngModelChange)="user.role=$event"
+                       [ngModel]="user?.role"
+                       fullWidth
+                       id="role"
+                       name="role"
+            >
+              <nb-option *ngFor="let role of UserRole | enumToArray"
+                         [value]="role['value']"
+              >
+                {{ role['value'] | titlecase }}
+              </nb-option>
+            </nb-select>
+          </div>
+        </div>
+        <!--endregion-->
+
+        <!--region Company name -->
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="companyName" class="label">Choisissez l'entreprise</label>
+            <nb-select
+                       [ngModel]="user?.company?.name"
+                       fullWidth
+                       id="companyName"
+            >
+              <nb-option *ngFor="let company of companies | async"
+                         [value]="company.name"
+              >
+                {{ company.name }}
+              </nb-option>
+            </nb-select>
+          </div>
+        </div>
+        <!--endregion-->
+
+        <!--region Language-->
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="language" class="label">Choisissez la langue</label>
+            <nb-select (ngModelChange)="user.language=$event"
+                       [ngModel]="user?.language"
+                       fullWidth
+                       id="language"
+            >
+              <nb-option value="Anglais">Anglais</nb-option>
+              <nb-option value="Français">Français</nb-option>
+              <nb-option value="Allemand">Allemand</nb-option>
+            </nb-select>
+          </div>
+        </div>
+        <!--endregion-->
+
+        <!--region Status -->
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="status" class="label">Choisissez le status</label>
+            <nb-select (ngModelChange)="user.status=$event"
+                       [ngModel]="user?.status"
+                       fullWidth
+                       id="status"
+            >
+              <nb-option *ngFor="let status of UserStatus | enumToArray"
+                         [value]="status['value']"
+              >
+                {{ status['value'] | titlecase }}
+              </nb-option>
+            </nb-select>
+          </div>
+        </div>
+        <!--endregion-->
+      </div>
+
+      <div class="row">
+       <div class="col">
+         <button (click)="onSubmit()"
+                 class="float-right"
+                 status="primary"
+                 nbButton
+                 type="submit"
+         >
+           Sauvegarder
+         </button>
+       </div>
+      </div>
+    </ng-container>
+
+    <ng-template #noData>L'utilisateur recherchée n'apparait pas</ng-template>
+  </nb-card-body>
+</nb-card>
