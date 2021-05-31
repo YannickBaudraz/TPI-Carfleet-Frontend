@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { PathLink } from '../../core/enums/path-link.enum';
-import { DriverDto } from '../../core/models/backend/data-transfer-object';
-import { LiteralObject } from '../../core/models/literal-object';
-import { RowSmartTable } from '../../core/models/table/row-smart.table';
-import { ApiService } from '../../core/services/api/api.service';
+import { PathLink } from '../../../core/enums/path-link.enum';
+import { DriverDto } from '../../../core/models/backend/data-transfer-object';
+import { LiteralObject } from '../../../core/models/literal-object';
+import { RowSmartTable } from '../../../core/models/table/row-smart.table';
+import { ApiService } from '../../../core/services/api/api.service';
 import { DriverViewModel } from './driver-view.model';
 
 /**
@@ -26,7 +26,7 @@ export class DriversViewComponent implements OnInit {
 
   //region Constructor
   /**
-   * Initialize a drivers view component.
+   * Instantiate a drivers view component.
    *
    * @param _apiService - The service that make HTTP request to the api
    * @param _router - The router
@@ -84,7 +84,7 @@ export class DriversViewComponent implements OnInit {
    * Additional initialization tasks.
    */
   ngOnInit(): void {
-    const driversObservable = this._apiService.getAll(PathLink.DRIVERS) as Observable<DriverDto[]>;
+    const driversObservable = this._apiService.getAll(PathLink.Drivers) as Observable<DriverDto[]>;
     driversObservable.pipe(map(this.mapDrivers()))
                      .subscribe((values: DriverViewModel[]) => this._drivers = values);
   }
@@ -95,7 +95,7 @@ export class DriversViewComponent implements OnInit {
    * @param row - The row of the table
    */
   async onRowSelected(row: RowSmartTable): Promise<void> {
-    await this._router.navigate([ `${PathLink.DRIVERS}/${row.data.id}` ]);
+    await this._router.navigate([ `${PathLink.Drivers}/${row.data.id}` ]);
   }
   //endregion
 

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { PathLink } from '../../core/enums/path-link.enum';
-import { VehicleDto } from '../../core/models/backend/data-transfer-object';
-import { ApiService } from '../../core/services/api/api.service';
+import { PathLink } from '../../../core/enums/path-link.enum';
+import { VehicleDto } from '../../../core/models/backend/data-transfer-object';
+import { ApiService } from '../../../core/services/api/api.service';
 
 /**
  * View of vehicle's details.
@@ -21,7 +21,7 @@ export class VehicleDetailViewComponent implements OnInit {
 
   //region Constructor
   /**
-   * Initialize a vehicle's view component.
+   * Instantiate a vehicle's view component.
    *
    * @param _apiService - The service that make HTTP request to the api
    * @param _route - Information about the route associated with the component.
@@ -44,7 +44,7 @@ export class VehicleDetailViewComponent implements OnInit {
    */
   ngOnInit(): void {
     const id = Number(this._route.snapshot.paramMap.get('id'));
-    const vehicleObservable = this._apiService.getOneById(PathLink.VEHICLES, id) as Observable<VehicleDto>;
+    const vehicleObservable = this._apiService.getOneById(PathLink.Vehicles, id) as Observable<VehicleDto>;
     vehicleObservable.subscribe((value: VehicleDto) => this._vehicle = value);
   }
   //endregion

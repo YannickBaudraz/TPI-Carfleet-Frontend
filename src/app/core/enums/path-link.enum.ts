@@ -5,15 +5,20 @@ export enum PathLink {
   /**
    * Companies path links.
    */
-  COMPANIES = 'companies',
+  Companies = 'companies',
 
   /**
    * Drivers path links.
    */
-  DRIVERS = 'drivers',
+  Drivers = 'drivers',
 
   /**
    * Vehicles path links.
    */
-  VEHICLES = 'vehicles'
+  Vehicles = 'vehicles',
+
+  /**
+   * Vehicles path links.
+   */
+  Users = 'users'
 }

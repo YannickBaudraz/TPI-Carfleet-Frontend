@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map, take } from 'rxjs/operators';
-import { API_COMPANIES_URL, API_DRIVERS_URL, API_VEHICLES_URL } from '../../constants';
+import { first, map } from 'rxjs/operators';
+import { API_COMPANIES_URL, API_DRIVERS_URL, API_USERS_URL, API_VEHICLES_URL } from '../../constants';
 import { PathLink } from '../../enums/path-link.enum';
 import { BackendResponse } from '../../models/backend/backend-response';
 import { DataTransferObject } from '../../models/backend/data-transfer-object';
@@ -15,7 +15,7 @@ export class ApiService {
 
   //region Constructors
   /**
-   * Initialize an api service.
+   * Instantiate an api service.
    *
    * @param _httpClient - Client to make HTTP request.
    */
@@ -28,14 +28,17 @@ export class ApiService {
     let apiUrl = '';
 
     switch (pathLink) {
-      case PathLink.DRIVERS:
+      case PathLink.Drivers:
         apiUrl = API_DRIVERS_URL;
         break;
-      case PathLink.VEHICLES:
+      case PathLink.Vehicles:
         apiUrl = API_VEHICLES_URL;
         break;
-      case PathLink.COMPANIES:
+      case PathLink.Companies:
         apiUrl = API_COMPANIES_URL;
+        break;
+      case PathLink.Users:
+        apiUrl = API_USERS_URL;
         break;
     }
 
@@ -52,10 +55,10 @@ export class ApiService {
    * @return Observable of a DTO's array.
    */
   getAll(pathLink: PathLink): Observable<DataTransferObject[]> {
-    const requestUrl = ApiService.getUrlByDtoType(pathLink);
+    const requestUrl = `${ApiService.getUrlByDtoType(pathLink)}/all`;
 
-    return this._httpClient.get<BackendResponse>(requestUrl + '/all').pipe(
-      take(1),
+    return this._httpClient.get<BackendResponse>(requestUrl).pipe(
+      first(),
       map((response: BackendResponse) => response.data as DataTransferObject[])
     );
   }
@@ -71,8 +74,42 @@ export class ApiService {
   getOneById(pathLink: PathLink, id: number): Observable<DataTransferObject> {
     const requestUrl = `${ApiService.getUrlByDtoType(pathLink)}/${id}`;
 
-    return this._httpClient.get<BackendResponse>(`${requestUrl}`).pipe(
-      take(1),
+    return this._httpClient.get<BackendResponse>(requestUrl).pipe(
+      first(),
+      map(response => response.data as DataTransferObject)
+    );
+  }
+
+  /**
+   * Performs a HTTP request to post the object wanted.
+   *
+   * @param pathLink - Path link of the api, for the url.
+   * @param dto - The dto sent by the GUI.
+   *
+   * @return Observable of a DTO.
+   */
+  saveOne(pathLink: PathLink, dto: DataTransferObject): Observable<DataTransferObject> {
+    const requestUrl = `${ApiService.getUrlByDtoType(pathLink)}/save`;
+
+    return this._httpClient.post<BackendResponse>(requestUrl, dto).pipe(
+      first(),
+      map(response => response.data as DataTransferObject)
+    );
+  }
+
+  /**
+   * Performs a HTTP request to put the object wanted.
+   *
+   * @param pathLink - Path link of the api, for the url.
+   * @param dto - The dto sent by the GUI.
+   *
+   * @return Observable of a DTO.
+   */
+  updateOne(pathLink: PathLink, dto: DataTransferObject): Observable<DataTransferObject> {
+    const requestUrl = `${ApiService.getUrlByDtoType(pathLink)}/update`;
+
+    return this._httpClient.put<BackendResponse>(requestUrl, dto).pipe(
+      first(),
       map(response => response.data as DataTransferObject)
     );
   }

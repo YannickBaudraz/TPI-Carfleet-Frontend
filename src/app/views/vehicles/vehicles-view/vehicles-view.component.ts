@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { PathLink } from '../../core/enums/path-link.enum';
-import { VehicleDto } from '../../core/models/backend/data-transfer-object';
-import { LiteralObject } from '../../core/models/literal-object';
-import { RowSmartTable } from '../../core/models/table/row-smart.table';
-import { ApiService } from '../../core/services/api/api.service';
+import { PathLink } from '../../../core/enums/path-link.enum';
+import { VehicleDto } from '../../../core/models/backend/data-transfer-object';
+import { LiteralObject } from '../../../core/models/literal-object';
+import { RowSmartTable } from '../../../core/models/table/row-smart.table';
+import { ApiService } from '../../../core/services/api/api.service';
 import { VehicleViewModel } from './vehicle-view.model';
 
 /**
@@ -26,7 +26,7 @@ export class VehiclesViewComponent implements OnInit {
 
   //region Constructor
   /**
-   * Initialize a vehicles view component.
+   * Instantiate a vehicles view component.
    *
    * @param _apiService - The service that make HTTP request to the api
    * @param _router - The router
@@ -84,7 +84,7 @@ export class VehiclesViewComponent implements OnInit {
    * Additional initialization tasks
    */
   ngOnInit(): void {
-    const vehiclesObservable = this._apiService.getAll(PathLink.VEHICLES) as Observable<VehicleDto[]>;
+    const vehiclesObservable = this._apiService.getAll(PathLink.Vehicles) as Observable<VehicleDto[]>;
     vehiclesObservable.pipe(map(this.mapVehicles()))
                       .subscribe((values: VehicleViewModel[]) => this._vehicles = values);
   }
@@ -95,7 +95,7 @@ export class VehiclesViewComponent implements OnInit {
    * @param row - The row of the table
    */
   async onRowSelected(row: RowSmartTable): Promise<void> {
-    await this._router.navigate([ `${PathLink.VEHICLES}/${row.data.id}` ]);
+    await this._router.navigate([ `${PathLink.Vehicles}/${row.data.id}` ]);
   }
   //endregion
 

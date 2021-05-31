@@ -1,13 +1,15 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
+  NbAlertModule,
   NbButtonModule,
   NbCardModule,
   NbDatepickerModule,
   NbDialogModule,
+  NbIconModule,
   NbInputModule,
   NbLayoutModule,
   NbMenuModule,
@@ -24,13 +26,16 @@ import { ThemeModule } from '../assets/ngx-admin/@theme/theme.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LayoutComponent } from './layout/layout.component';
-import { GenderPipe } from './pipes/gender/gender.pipe';
-import { CompaniesViewComponent } from './views/companies-view/companies-view.component';
-import { CompanyDetailViewComponent } from './views/company-detail-view/company-detail-view.component';
-import { DriverDetailViewComponent } from './views/driver-detail-page/driver-detail-view.component';
-import { DriversViewComponent } from './views/drivers-page/drivers-view.component';
-import { VehicleDetailViewComponent } from './views/vehicle-detail-page/vehicle-detail-view.component';
-import { VehiclesViewComponent } from './views/vehicles-page/vehicles-view.component';
+import { EnumToArrayPipe } from './pipes/enum-to-array.pipe';
+import { GenderPipe } from './pipes/gender.pipe';
+import { CompaniesViewComponent } from './views/companies/companies-view/companies-view.component';
+import { CompanyDetailViewComponent } from './views/companies/company-detail-view/company-detail-view.component';
+import { DriverDetailViewComponent } from './views/drivers/driver-detail-view/driver-detail-view.component';
+import { DriversViewComponent } from './views/drivers/drivers-view/drivers-view.component';
+import { UserDetailComponent } from './views/users/user-detail/user-detail.component';
+import { UsersViewComponent } from './views/users/users-view/users-view.component';
+import { VehicleDetailViewComponent } from './views/vehicles/vehicle-detail-view/vehicle-detail-view.component';
+import { VehiclesViewComponent } from './views/vehicles/vehicles-view/vehicles-view.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +49,9 @@ import { VehiclesViewComponent } from './views/vehicles-page/vehicles-view.compo
     GenderPipe,
     CompaniesViewComponent,
     CompanyDetailViewComponent,
+    UsersViewComponent,
+    UserDetailComponent,
+    EnumToArrayPipe,
   ],
   imports: [
     AppRoutingModule,
@@ -65,7 +73,10 @@ import { VehiclesViewComponent } from './views/vehicles-page/vehicles-view.compo
     Ng2SmartTableModule,
     NbLayoutModule,
     NbInputModule,
-    NbSelectModule
+    NbSelectModule,
+    NbIconModule,
+    ReactiveFormsModule,
+    NbAlertModule
   ],
   providers: [],
   bootstrap: [ AppComponent ]

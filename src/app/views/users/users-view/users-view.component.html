@@ -1,0 +1,22 @@
+<nb-card>
+  <nb-card-header>
+    Liste des entreprises enregistrées
+    <button (click)="onAddClick()"
+            class="float-right btn btn-primary"
+            ghost
+            nbButton
+            status="primary"
+    >
+      <nb-icon icon="plus-outline"></nb-icon>
+      Ajouter un nouvel utilisateur
+    </button>
+  </nb-card-header>
+
+  <nb-card-body>
+    <ng2-smart-table [settings]="settings"
+                     [source]="users"
+                     (userRowSelect)="onRowSelected($event)"
+                     (edit)="onRowSelected($event)"
+    ></ng2-smart-table>
+  </nb-card-body>
+</nb-card>

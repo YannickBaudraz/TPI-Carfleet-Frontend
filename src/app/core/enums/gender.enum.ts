@@ -1,7 +1,7 @@
 /**
  * Genders in the meaning of "sex".
  */
-export enum Gender {
+export enum GenderEnum {
   /**
    * Male.
    */

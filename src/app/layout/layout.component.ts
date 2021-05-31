@@ -21,7 +21,7 @@ export class LayoutComponent {
 
   //region Constructor
   /**
-   * Initialize a layout component.
+   * Instantiate a layout component.
    */
   constructor() {
     this._menu = MENU_ITEMS;

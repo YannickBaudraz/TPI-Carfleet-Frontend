@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { PathLink } from '../../core/enums/path-link.enum';
-import { DriverDto } from '../../core/models/backend/data-transfer-object';
-import { ApiService } from '../../core/services/api/api.service';
+import { PathLink } from '../../../core/enums/path-link.enum';
+import { DriverDto } from '../../../core/models/backend/data-transfer-object';
+import { ApiService } from '../../../core/services/api/api.service';
 
 /**
  * View of driver's details.
@@ -21,7 +21,7 @@ export class DriverDetailViewComponent implements OnInit {
 
   //region Constructor
   /**
-   * Initialize a driver's view component.
+   * Instantiate a driver's view component.
    *
    * @param _apiService - The service that make HTTP request to the api
    * @param _route - Information about the route associated with the component.
@@ -44,7 +44,7 @@ export class DriverDetailViewComponent implements OnInit {
    */
   ngOnInit(): void {
     const id = Number(this._route.snapshot.paramMap.get('id'));
-    const driverObservable = this._apiService.getOneById(PathLink.DRIVERS, id) as Observable<DriverDto>;
+    const driverObservable = this._apiService.getOneById(PathLink.Drivers, id) as Observable<DriverDto>;
     driverObservable.subscribe((value: DriverDto) => this._driver = value);
   }
   //endregion

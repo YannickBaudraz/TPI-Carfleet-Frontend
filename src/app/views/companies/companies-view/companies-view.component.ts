@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { PathLink } from '../../core/enums/path-link.enum';
-import { CompanyDto } from '../../core/models/backend/data-transfer-object';
-import { LiteralObject } from '../../core/models/literal-object';
-import { RowSmartTable } from '../../core/models/table/row-smart.table';
-import { ApiService } from '../../core/services/api/api.service';
+import { PathLink } from '../../../core/enums/path-link.enum';
+import { CompanyDto } from '../../../core/models/backend/data-transfer-object';
+import { LiteralObject } from '../../../core/models/literal-object';
+import { RowSmartTable } from '../../../core/models/table/row-smart.table';
+import { ApiService } from '../../../core/services/api/api.service';
 import { CompanyViewModel } from './company-view.model';
 
 /**
@@ -26,7 +26,7 @@ export class CompaniesViewComponent implements OnInit {
 
   //region Constructor
   /**
-   * Initialize a companies view component.
+   * Instantiate a companies view component.
    *
    * @param _apiService - The service that make HTTP request to the api
    * @param _router - The router service.
@@ -84,7 +84,7 @@ export class CompaniesViewComponent implements OnInit {
    * Additional initialization tasks.
    */
   ngOnInit(): void {
-    const companiesObservable = this._apiService.getAll(PathLink.COMPANIES) as Observable<CompanyDto[]>;
+    const companiesObservable = this._apiService.getAll(PathLink.Companies) as Observable<CompanyDto[]>;
     companiesObservable.pipe(map(this.mapCompanies()))
                        .subscribe((values: CompanyViewModel[]) => this._companies = values);
   }
@@ -95,7 +95,7 @@ export class CompaniesViewComponent implements OnInit {
    * @param row - The row of the table
    */
   async onRowSelected(row: RowSmartTable): Promise<void> {
-    await this._router.navigate([ `${PathLink.COMPANIES}/${row.data.id}` ]);
+    await this._router.navigate([ `${PathLink.Companies}/${row.data.id}` ]);
   }
   //endregion
 

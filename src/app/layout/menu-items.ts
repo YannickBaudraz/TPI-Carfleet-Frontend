@@ -1,12 +1,13 @@
 import { NbMenuItem } from '@nebular/theme';
+import { PathLink } from '../core/enums/path-link.enum';
 
 /**
  * Drivers menu item.
  */
 const drivers: NbMenuItem = {
   title: 'Contacts',
-  icon: 'people-outline',
-  link: '/drivers',
+  icon: 'phone-outline',
+  link: `/${PathLink.Drivers}`,
   home: true
 };
 
@@ -16,7 +17,7 @@ const drivers: NbMenuItem = {
 const vehicles: NbMenuItem = {
   title: 'Véhicules',
   icon: 'car-outline',
-  link: '/vehicles'
+  link: `/${PathLink.Vehicles}`
 };
 
 /**
@@ -25,10 +26,19 @@ const vehicles: NbMenuItem = {
 const companies: NbMenuItem = {
   title: 'Entreprises',
   icon: 'briefcase-outline',
-  link: '/companies'
+  link: `/${PathLink.Companies}`
+};
+
+/**
+ * Users menu item.
+ */
+const users: NbMenuItem = {
+  title: 'Utilisateurs',
+  icon: 'people-outline',
+  link: `/${PathLink.Users}`
 };
 
 /**
  * An array of {@link NbMenuItem} for the sidebar.
  */
-export const MENU_ITEMS: NbMenuItem[] = [ drivers, vehicles, companies ];
+export const MENU_ITEMS: NbMenuItem[] = [ drivers, vehicles, companies, users ];
