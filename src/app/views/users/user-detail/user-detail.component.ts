@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NbGlobalLogicalPosition, NbToastrConfig, NbToastrService } from '@nebular/theme';
 import { Observable } from 'rxjs';
 import { UserStatus } from 'src/app/core/enums/user-status.enum';
@@ -32,10 +32,12 @@ export class UserDetailComponent implements OnInit {
    * Instantiate
    * @param _apiService - The service that make HTTP request to the api.
    * @param _route - Information about the route associated with the component.
+   * @param _router - The router service.
    * @param _toastrService - The service that show a toastr when update fail.
    */
   constructor(private _apiService: ApiService,
               private _route: ActivatedRoute,
+              private _router: Router,
               private _toastrService: NbToastrService
   ) {
     this._mode = ViewMode.Create;
@@ -45,7 +47,6 @@ export class UserDetailComponent implements OnInit {
       position: NbGlobalLogicalPosition.BOTTOM_END,
       preventDuplicates: true
     };
-    console.log(this._user);
   }
   //endregion
 
@@ -70,7 +71,7 @@ export class UserDetailComponent implements OnInit {
   get companies(): Observable<CompanyDto[]> {
     return this._companies;
   }
-//endregion
+  //endregion
 
   //region Methods
   ngOnInit(): void {
@@ -93,22 +94,21 @@ export class UserDetailComponent implements OnInit {
    */
   onSubmit(): void {
     this._companies.subscribe((companies: CompanyDto[]) => {
-      return this._user.company = (companies.find((company: CompanyDto) => {
-        return company.name === this._user.company.name;
-      }) as CompanyDto);
+      this._user.company = (companies.find((company: CompanyDto) => company.name === this._user.company.name) as CompanyDto);
+      const userObservable = this._mode === ViewMode.Create
+                             ? this._apiService.saveOne(PathLink.Users, this._user) as Observable<UserDto>
+                             : this._apiService.updateOne(PathLink.Users, this._user) as Observable<UserDto>;
+
+      userObservable.subscribe(async (value: UserDto) => {
+          if (!value) {
+            this._toastrService.danger('L\'opération n\'a pas pu être effectuée.', 'Erreur', this._toastrConfig);
+          } else {
+            await this._router.navigate([ `${PathLink.Users}` ]);
+          }
+        },
+        () => this._toastrService.danger('L\'opération n\'a pas pu être effectuée.', 'Erreur', this._toastrConfig)
+      );
     });
-
-    const userObservable = this._mode === ViewMode.Create
-                           ? this._apiService.saveOne(PathLink.Users, this._user) as Observable<UserDto>
-                           : this._apiService.updateOne(PathLink.Users, this._user) as Observable<UserDto>;
-
-    userObservable.subscribe((value: UserDto) => {
-        if (!value) {
-          this._toastrService.danger('L\'opération n\'a pas pu être effectuée.', 'Erreur', this._toastrConfig);
-        }
-      },
-      () => this._toastrService.danger('L\'opération n\'a pas pu être effectuée.', 'Erreur', this._toastrConfig)
-    );
   }
   //endregion
 }

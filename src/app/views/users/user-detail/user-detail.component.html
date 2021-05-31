@@ -83,7 +83,7 @@
         <div class="col-sm-6">
           <div class="form-group">
             <label for="companyName" class="label">Choisissez l'entreprise</label>
-            <nb-select
+            <nb-select (ngModelChange)="user.company.name=$event"
                        [ngModel]="user?.company?.name"
                        fullWidth
                        id="companyName"
