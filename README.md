@@ -11,6 +11,15 @@ This is the front-end application of CarFleet.
 
 Run `yarn install`.
 
+## Push in a production server
+
+Once you have access to your server, do this tasks in this order :
+
+1. Install the prerequisites
+1. Run yarn install.
+1. Run yarn build.
+1. Move manually the dist folder your server.
+
 ## Build
 
 Run `yarn build` to build the project to production. The build artifacts will be stored in the `dist/` directory.
