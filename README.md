@@ -38,9 +38,9 @@ Usage videos :
 
 ### Users
 
-- [Users coming soon...]()
-- [Create a new user coming soon...]()
-- [Edit an user coming soon...]()
+- [Users coming soon...](https://youtu.be/ceh57pPFyTw)
+- [Create a new user coming soon...](https://youtu.be/UiAH7_0JF0Q)
+- [Edit an user coming soon...](https://youtu.be/efMSJDp7acA)
 
 ## Documentation
 
@@ -62,13 +62,6 @@ Navigate to `http://localhost:4200/`.
 Run `yarn start` for a production server.
 
 Navigate to `http://localhost:4200/`.
-
-## Documentation
-
-Run `yarn gerenate:doc` to generate API documentation in the folder _documentation_.
-
-The command `yarn generate:doc:serve` starts a server at the port 51002 and open the doc in the default browser
-after the generation is complete.
 
 ## Tests
 
